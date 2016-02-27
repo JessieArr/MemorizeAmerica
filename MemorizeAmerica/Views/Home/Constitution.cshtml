@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Constitution";
+}
+
+<div ng-app="MemorizeAmerica" ng-controller="ConstitutionCtrl">
+    <h2>Constitution</h2>
+    <p>This section will generate a quiz for you with questions about the constitution. The questions will be randomly generated each time, so feel free to take it multiple times!</p>
+    <input type="button" value="Start Quiz!" class="btn btn-success" ng-click="StartQuiz();" ng-hide="quizStarted" />
+    <div ng-show="quizStarted">
+        <h3>Question {{currentQuestion}} of {{totalQuestions}}</h3>
+        <p>
+            <b>{{questionText}}</b>
+        </p>
+        <div ng-repeat="option in options">
+            <input type="radio" name="answers" value="{{$index}}" ng-disabled="submitted" />{{option.text}}
+        </div>
+        <br />
+        <br />
+        <br />
+        <input type="button" value="Submit Answer" class="btn btn-success" ng-click="SubmitAnswer()" ng-hide="submitted" />
+        <div ng-show="submitted">
+            <div ng-show="rightAnswer">
+                Right Answer!
+            </div>
+            <div ng-show="wrongAnswer">
+                Wrong Answer!
+            </div>
+            <p>
+                For more information, read here: <a href="{{moreInfoURL}}" target="__blank">{{moreInfoURL}}</a>
+            </p>
+            <input type="button" class="btn btn-info" value="Next Question" />
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/constitution")
+}
